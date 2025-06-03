@@ -14,8 +14,17 @@ h1{
     padding-top: 2rem;
 
     &--results{
-        max-width: 1600px;
+        max-width: 1400px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        justify-items: center;
       }
+    &--btn{
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
 }
 
 form{
@@ -72,6 +81,11 @@ input::selection {
     transition: .3s all ease-in-out;
     cursor: pointer;
 
+    &:hover{
+    background-color: #470250be;
+    color: white;
+    }
+
     &--swiper{
         color: #E50914;
         font-size: 22px;
@@ -82,11 +96,10 @@ input::selection {
             color: rgb(110, 3, 3);
         }
     }
-}
-
-.btn:hover{
-    background-color: #470250be;
-    color: white;
+    &--is-active{
+        background-color: #470250be;
+        color: white;
+    }
 }
 
 .logo{
@@ -94,35 +107,11 @@ input::selection {
     margin-bottom: 2rem;
 }
 
-.swiper {
-    width: 100%;
-    position: relative;
-
-    // &::before{
-    //     content: "";
-    //     position: absolute;
-    //     width: 100%;
-    //     height: 100%;
-    //     right: 0;
-    //     z-index: 4;
-    //     background: linear-gradient(90deg,rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0) 85%, rgba(0, 0, 0, 0.5) 100%);
-    // }
-    &-slide{
-        font-size: 32px;
-        font-weight: 700;
-        text-transform: uppercase;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        letter-spacing: 2px;
-        background-color: #e2e2e2;
-    }
-}
-
-.movie{
+.show{
     &__single{
         position: relative;
         width: fit-content;
+        overflow: hidden;
 
         &::before{
             content: "";
@@ -130,7 +119,12 @@ input::selection {
             width: 100%;
             height: 100%;
             z-index: 3;
+            translate: -50% 0;
+            bottom: 0;
             background: linear-gradient(0deg,rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 50%);
+        }
+        &:hover .show__rating{
+            transform: translateX(0);
         }
     }
 
@@ -154,4 +148,38 @@ input::selection {
             height: 100%;
         }
     }
+
+    &__rating{
+        position: absolute;
+        background-color: #E50914;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+        border-radius: 50%;
+        padding: .6rem;
+        top: 10px;
+        right: 10px;
+        transform: translateX(200%);
+        transition: .3s all ease-in-out;
+    }
+
+    &__details{
+        display: flex;
+        gap: 1rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 200%);
+        background-color: white;
+        width: 80%;
+        height: 80%;
+        z-index: 9;
+        padding: 3rem;
+        transition: .3s all ease-in-out;
+
+        &--is-active{
+            transform: translate(-50%, -50%);
+        }
+    }
 }
+
