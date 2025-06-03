@@ -1,5 +1,6 @@
 const resultsHTML = document.querySelector('.wrapper--results');
 const wrapperBtn = document.querySelector('.wrapper--btn');
+const wrapperSingle = document.querySelector('.wrapper--single');
 const showDetailsHTML = document.querySelector('.show__details');
 let showContainer;
 let btnClose;
@@ -60,10 +61,15 @@ async function displayShowDetails(showID) {
        <p class="show__overview">${dataID.overview}</p>
     </div>
     `;
+
     btnClose = document.createElement('div');
     btnClose.classList.add('show__close');
     btnClose.textContent = "❌";
     showDetailsHTML.append(btnClose);
+
+    localStorage.setItem('showDetails', showDetailsHTML.innerHTML);
+    location.href = "single.html";
+    
 
     btnClose.addEventListener('click', () => {
       showDetailsHTML.classList.remove('show__details--is-active');
@@ -73,23 +79,38 @@ async function displayShowDetails(showID) {
 }
 
 
-// == Initial display ==
-displayShows("top_rated", document.querySelector('.btn--top-rated'));
 
-
-// == Event Listener btns ==
-wrapperBtn.addEventListener('click', async (e)=>{
-    if (e.target.classList.contains('btn')) {
-        const filter = e.target.dataset.filter;
-        await displayShows(filter, e.target);
+if (wrapperSingle) {
+    wrapperSingle.innerHTML = localStorage.getItem('showDetails');
+    const restoredBtn = wrapperSingle.querySelector('.show__close');
+    if (restoredBtn) {
+        restoredBtn.addEventListener('click', () => {
+          location.href = "index.html";
+        });
     }
-})
+}
 
-resultsHTML.addEventListener('click', async (e)=>{
-    btnClose = document.querySelector('.show__close');
-    if (e.target.classList.contains('show__single')) {
-        const id = e.target.dataset.id;
-        showDetailsHTML.classList.toggle('show__details--is-active');
-        await displayShowDetails(id);
-    } 
-})
+
+if (resultsHTML) {
+    // == Initial display ==
+    displayShows("top_rated", document.querySelector('.btn--top-rated'));
+    // == Event Listener btns ==
+    wrapperBtn.addEventListener('click', async (e)=>{
+        if (e.target.classList.contains('btn')) {
+            const filter = e.target.dataset.filter;
+            await displayShows(filter, e.target);
+        }
+    })
+    resultsHTML.addEventListener('click', async (e)=>{
+        btnClose = document.querySelector('.show__close');
+        if (e.target.classList.contains('show__single')) {
+            const id = e.target.dataset.id;
+            showDetailsHTML.classList.toggle('show__details--is-active');
+            await displayShowDetails(id);
+        } 
+    })
+}
+
+
+
+

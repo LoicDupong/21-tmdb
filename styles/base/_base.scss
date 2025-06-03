@@ -25,6 +25,18 @@ h1{
         gap: 1rem;
         justify-content: center;
     }
+
+    &--single{
+        max-width: 1400px;
+        position: relative;
+        padding: 0;
+        display: flex;
+        gap: 1rem;
+        background-color: white;
+        border-radius: 10px;
+        z-index: 9;
+        transition: .3s all ease-in-out;
+    }
 }
 
 form{
@@ -86,16 +98,6 @@ input::selection {
     color: white;
     }
 
-    &--swiper{
-        color: #E50914;
-        font-size: 22px;
-        cursor: pointer;
-        transition: .3s all ease-in-out;
-
-        &:hover{
-            color: rgb(110, 3, 3);
-        }
-    }
     &--is-active{
         background-color: #470250be;
         color: white;
@@ -231,6 +233,13 @@ input::selection {
 
         &:hover{
             rotate: 180deg;
+        }
+
+        &--single{
+            &:hover{
+            transform: translateX(-15%);
+            rotate: unset;
+            }
         }
     }
 }
