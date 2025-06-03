@@ -2,6 +2,7 @@ const resultsHTML = document.querySelector('.wrapper--results');
 const wrapperBtn = document.querySelector('.wrapper--btn');
 const showDetailsHTML = document.querySelector('.show__details');
 let showContainer;
+let btnClose;
 
 const apiKey = `6631e5f1dc96088e0d26b86da29b5b6a`;
 let imgUrl = `https://image.tmdb.org/t/p/w500`;
@@ -58,7 +59,17 @@ async function displayShowDetails(showID) {
        <h2 class="show__title show__title--details">${dataID.name}</h2> 
        <p class="show__overview">${dataID.overview}</p>
     </div>
-    `
+    `;
+    btnClose = document.createElement('div');
+    btnClose.classList.add('show__close');
+    btnClose.textContent = "❌";
+    showDetailsHTML.append(btnClose);
+
+    btnClose.addEventListener('click', () => {
+      showDetailsHTML.classList.remove('show__details--is-active');
+      showDetailsHTML.innerHTML = "";
+    });
+
 }
 
 
@@ -75,9 +86,10 @@ wrapperBtn.addEventListener('click', async (e)=>{
 })
 
 resultsHTML.addEventListener('click', async (e)=>{
+    btnClose = document.querySelector('.show__close');
     if (e.target.classList.contains('show__single')) {
         const id = e.target.dataset.id;
+        showDetailsHTML.classList.toggle('show__details--is-active');
         await displayShowDetails(id);
-    }
+    } 
 })
-

@@ -137,15 +137,39 @@ input::selection {
         left: 50%;
         z-index: 5;
         transform: translate(-50%, 0);
+
+        &--details{
+            position: relative;
+            color: #141414;
+            font-size: 64px;
+            font-weight: 400;
+            transform: none;
+            left: unset;
+            bottom: unset;
+            margin-bottom: 2rem;
+        }
     }
 
     &__img {
         height: 350px;
         width: 100%;
+        flex-basis: 35%;
         img{
             object-fit: cover;
             width: 100%;
             height: 100%;
+        }
+        
+        &--details{
+            height: 100%;
+            width: auto;
+            img{
+                width: auto;
+                height: 100%;
+                object-fit: unset;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
         }
     }
 
@@ -171,14 +195,42 @@ input::selection {
         left: 50%;
         transform: translate(-50%, 200%);
         background-color: white;
+        border-radius: 10px;
         width: 80%;
         height: 80%;
         z-index: 9;
-        padding: 3rem;
         transition: .3s all ease-in-out;
 
         &--is-active{
             transform: translate(-50%, -50%);
+        }
+    }
+
+    &__infos{
+        flex-basis: 65%;
+        padding: 3rem 5rem;
+        text-align: center;
+    }
+
+    &__overview{
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px #1414146c;
+        padding: 2rem;
+        line-height: 25px;
+        text-align: justify;
+    }
+
+    &__close{
+        content: "❌";
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 38px;
+        transition: .3s all ease-in-out;
+        cursor: pointer;
+
+        &:hover{
+            rotate: 180deg;
         }
     }
 }
