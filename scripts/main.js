@@ -54,11 +54,19 @@ async function displayShowDetails(showID) {
     showDetailsHTML.innerHTML = "";
     const { data, dataID }= await getAPI(showID)
     imgPath = dataID.poster_path ? `${imgUrl}${dataID.poster_path}` : `${defautImg}`;
+    showGenre = 
     showDetailsHTML.innerHTML += `
     <div class="show__img show__img--details"><img src="${imgPath}" alt=""></div>
     <div class="show__infos">
        <h2 class="show__title show__title--details">${dataID.name}</h2> 
-       <p class="show__overview">${dataID.overview}</p>
+       <div class="show__overview"><p>${dataID.overview}</p>
+       <hr>
+       <p>Genres : ${dataID.genres.map(g => g.name).join(', ')}</p>
+       <p>Seasons : ${dataID.number_of_seasons}</p>
+       <p>Episodes : ${dataID.number_of_episodes}</p>
+       <h3>Score : ${(dataID.vote_average).toFixed(1)}/10</h3>
+       </div>
+        
     </div>
     `;
 
